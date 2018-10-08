@@ -20,8 +20,8 @@ networking: false
 ssh_port: 22
 
 ec2_lab_node_types_networking:
-  tjnp3: junos-byol
-  tjnp4: junos-byol
+  rtr3: junos-byol
+  rtr4: junos-byol
 
 
 # Instance types used for lab configurations
