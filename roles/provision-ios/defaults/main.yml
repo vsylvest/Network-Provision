@@ -21,7 +21,7 @@ ssh_port: 22
 
 ec2_lab_node_types_networking:
   rtr1: csr-byol
-  rtr2: csr-byol
+  rtr2: csr-byols
 
 
 # Instance types used for lab configurations
