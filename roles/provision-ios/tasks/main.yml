@@ -1,0 +1,14 @@
+  - name: Create RHEL instance in ec2
+    ec2:
+      image: "{{ ami_name }}"
+      instance_type: "{{ instance_size }}"
+      key_name: "{{ ssh_key_name }}"
+      region: "{{ region }}"
+      wait: true
+      count: "{{ vm_count|int }}"
+      instance_tags: "{'Name':'{{ instance_tag }}',  'group':'{{ security_group }}'}"
+      vpc_subnet_id: "{{ subnet_id }}"
+      assign_public_ip: yes
+      group_id: "{{ security_group }}"  
+    register: ec2r
+    tags: create

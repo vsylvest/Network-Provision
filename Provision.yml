@@ -1,0 +1,10 @@
+# Description
+# ===========
+# This playbook is used to create VNF on AWS
+
+---
+- name : Provision VNF on AWS
+  hosts: localhost 
+  gather_facts: False
+  roles:
+    - "provision-{{ vnf }}"
