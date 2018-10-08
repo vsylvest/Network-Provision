@@ -8,8 +8,8 @@ ec2_subnet: "172.16.0.0/16"
 ec2_subnet2: "172.17.0.0/16"
 ec2_vpc_subnet_id: "subnet-09fab7d8a13f32ce6"
 ec2_vpc_subnet_id2: "subnet-0da338d16352f33bc"
-ec2_security_group: "sg-0990a34c22a618226"
-ec2_security_group2: "sg-0a6952a29e28f646a"
+ec2_security_group: "Cisco-insecure_all"
+ec2_security_group2: "Cisco-insecure_all2"
 student_total: 1
 ec2_vpc_id: vpc-0b00c8cde80b8967d
 ec2_vpc_id2: vpc-0ef72dd9bc56f015d
