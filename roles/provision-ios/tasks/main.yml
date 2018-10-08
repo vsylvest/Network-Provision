@@ -40,7 +40,7 @@
     resource: "{{ item.id }}"
     state: present
     tags:
-      Name: "{{ ec2_name_prefix }}-student{{item.0 + 1}}-tios1"
+      Name: "{{ ec2_name_prefix }}-tios1"
       Workshop_tios1: "{{ec2_name_prefix}}-tios1"
       short_name: "tios1"
   with_indexed_items:
