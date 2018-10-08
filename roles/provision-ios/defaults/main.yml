@@ -11,6 +11,10 @@ ec2_vpc_subnet_id2: "subnet-0da338d16352f33bc"
 ec2_security_group: "sg-0990a34c22a618226"
 ec2_security_group2: "sg-0a6952a29e28f646a"
 student_total: 1
+ec2_vpc_id: vpc-0b00c8cde80b8967d
+ec2_vpc_id2: vpc-0ef72dd9bc56f015d
+
+
 
 networking: false
 ssh_port: 22
