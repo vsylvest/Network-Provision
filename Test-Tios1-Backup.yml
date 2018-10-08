@@ -1,6 +1,6 @@
 ---
 - name: BACKUP ROUTER CONFIGURATIONS
-  hosts: tag_Name_Test_Cisco_tios1
+  hosts: tag_Name_Test_Cisco_rtr1
   connection: network_cli
   gather_facts: no
 

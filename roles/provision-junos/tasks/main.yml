@@ -1,0 +1,63 @@
+- name: set node types (NETWORKING MODE)
+  set_fact:
+    rtr3_node: "{{ ec2_lab_node_types_networking['rtr3'] }}"
+
+
+##############Router 1##############
+
+- name: find ami for rtr3 (NETWORKING MODE)
+  ec2_ami_facts:
+    region: "{{ ec2_region }}"
+    owners: "{{ ec2_instance_types[rtr3_node].owners }}"
+    filters:
+      name: "{{ ec2_instance_types[rtr3_node].filter }}"
+      architecture: "{{ ec2_instance_types[rtr3_node].architecture }}"
+  register: amis
+
+- name: save ami for rtr3 (NETWORKING MODE)
+  set_fact:
+    rtr3_ami: >
+      {{ amis.images | selectattr('name', 'defined') | sort(attribute='creation_date') | last }}
+      
+- name: Create EC2 instances for rtr3 node (NETWORKING MODE)
+  ec2:
+    assign_public_ip: yes
+    key_name: "Cisco-key"
+    group: "{{ ec2_security_group }}"
+    instance_type: "{{ ec2_instance_types[rtr3_node].size }}"
+    image: "{{ rtr3_ami.image_id }}"
+    region: "{{ ec2_region }}"
+    exact_count: "{{ student_total }}"
+    count_tag:
+      Workshop_rtr3: "{{ec2_name_prefix}}-rtr3"
+    wait: "{{ ec2_wait }}"
+    instance_tags: "{'Name':'Test-Juniper-rtr3' }"
+    vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
+  register: rtr3_output
+
+
+
+      
+
+- name: grab all network interfaces for VPC 1 (NETWORKING MODE)
+  ec2_eni_facts:
+    region: "{{ ec2_region }}"
+    filters:
+      vpc-id: "{{ec2_vpc_id}}"
+  register: eni_facts_1
+
+- name: grab all network interfaces for VPC 2 (NETWORKING MODE)
+  ec2_eni_facts:
+    region: "{{ ec2_region }}"
+    filters:
+      vpc-id: "{{ec2_vpc_id2}}"
+  register: eni_facts_2
+
+- name: Disable Source/Dest check on instance {{ec2_vpc_id1}} (NETWORKING MODE)
+  ec2_eni:
+    eni_id: "{{ item['network_interface_id'] }}"
+    region: "{{ ec2_region }}"
+    source_dest_check: false
+  with_items:
+    - "{{eni_facts_1['network_interfaces']}}"
+    - "{{eni_facts_2['network_interfaces']}}"
