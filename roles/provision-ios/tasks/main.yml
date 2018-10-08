@@ -37,15 +37,14 @@
 - name: Ensure tags are present for tios1 node (NETWORKING MODE)
   ec2_tag:
     region: "{{ ec2_region }}"
-    resource: "{{item.1}}"
+    resource: "{{ item.id }}"
     state: present
     tags:
       Name: "{{ ec2_name_prefix }}-student{{item.0 + 1}}-tios1"
       Workshop_tios1: "{{ec2_name_prefix}}-tios1"
-      Index: "{{ item[0] }}"
       short_name: "tios1"
   with_indexed_items:
-    - "{{ tios1_output.instance_ids }}"
+    - "{{ tios1_output }}"
 
       
 
