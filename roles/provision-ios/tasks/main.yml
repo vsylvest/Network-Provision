@@ -21,6 +21,7 @@
   set_fact:
     tios1_ami: >
       {{ amis.images | selectattr('name', 'defined') | sort(attribute='creation_date') | last }}
+      
 - name: Create EC2 instances for tios1 node (NETWORKING MODE)
   ec2:
     assign_public_ip: yes
@@ -52,20 +53,8 @@
 
 ##############Router 2##############
 
-- name: find ami for tios2 (NETWORKING MODE)
-  ec2_ami_facts:
-    region: "{{ ec2_region }}"
-    owners: "{{ ec2_instance_types[tios2_node].owners }}"
-    filters:
-      name: "{{ ec2_instance_types[tios2_node].filter }}"
-      architecture: "{{ ec2_instance_types[tios2_node].architecture }}"
-  register: amis
-  when: networking
 
-- name: save ami for tios2 (NETWORKING MODE)
-  set_fact:
-    tios2_ami: >
-      {{ amis.images | selectattr('name', 'defined') | sort(attribute='creation_date') | last }}
+      
 - name: Create EC2 instances for tios2 node in VPC-2 (NETWORKING MODE)
   ec2:
     assign_public_ip: yes
@@ -97,19 +86,7 @@
 ##############Router 3##############
 - name: turn on tios3 and tios4 if special is configured
   block:
-  - name: find ami for tios3 (NETWORKING MODE)
-    ec2_ami_facts:
-      region: "{{ ec2_region }}"
-      owners: "{{ ec2_instance_types[tios3_node].owners }}"
-      filters:
-        name: "{{ ec2_instance_types[tios3_node].filter }}"
-        architecture: "{{ ec2_instance_types[tios3_node].architecture }}"
-    register: amis
 
-  - name: save ami for tios3 (NETWORKING MODE)
-    set_fact:
-      tios3_ami: >
-        {{ amis.images | selectattr('name', 'defined') | sort(attribute='creation_date') | last }}
   - name: Create EC2 instances for tios3 node (NETWORKING MODE)
     ec2:
       assign_public_ip: yes
@@ -140,19 +117,6 @@
 
   ##############Router 4##############
 
-  - name: find ami for tios4 (NETWORKING MODE)
-    ec2_ami_facts:
-      region: "{{ ec2_region }}"
-      owners: "{{ ec2_instance_types[tios4_node].owners }}"
-      filters:
-        name: "{{ ec2_instance_types[tios4_node].filter }}"
-        architecture: "{{ ec2_instance_types[tios4_node].architecture }}"
-    register: amis
-
-  - name: save ami for tios4 (NETWORKING MODE)
-    set_fact:
-      tios4_ami: >
-        {{ amis.images | selectattr('name', 'defined') | sort(attribute='creation_date') | last }}
   - name: Create EC2 instances for tios4 node in VPC-2 (NETWORKING MODE)
     ec2:
       assign_public_ip: yes
