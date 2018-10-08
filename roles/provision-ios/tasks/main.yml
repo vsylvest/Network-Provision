@@ -31,20 +31,11 @@
     count_tag:
       Workshop_tios1: "{{ec2_name_prefix}}-tios1"
     wait: "{{ ec2_wait }}"
+    instance_tags: "{'Name':'Test-Cisco-tios1' }"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
   register: tios1_output
 
-- name: Ensure tags are present for tios1 node (NETWORKING MODE)
-  ec2_tag:
-    region: "{{ ec2_region }}"
-    resource: "{{ item.id }}"
-    state: present
-    tags:
-      Name: "{{ ec2_name_prefix }}-tios1"
-      Workshop_tios1: "{{ec2_name_prefix}}-tios1"
-      short_name: "tios1"
-  with_indexed_items:
-    - "{{ tios1_output }}"
+
 
       
 
