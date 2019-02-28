@@ -4,17 +4,15 @@ ec2_region: ap-southeast-2
 ec2_wait: yes
 #need to circle back and fix this for teardown - sean
 ec2_az: "{{ec2_region}}a"
-ec2_subnet: "172.16.0.0/16"
-ec2_subnet2: "172.17.0.0/16"
-ec2_vpc_subnet_id: "subnet-09fab7d8a13f32ce6"
-ec2_vpc_subnet_id2: "subnet-0da338d16352f33bc"
-ec2_security_group: "Cisco-insecure_all"
-ec2_security_group2: "Cisco-insecure_all2"
+ec2_subnet: "172.20.1.0/24"
+ec2_subnet2: "172.20.2.0/24"
+ec2_vpc_subnet_id: "subnet-0af40673590a7497b"
+ec2_vpc_subnet_id2: "subnet-08089b808dd7d79c8"
+ec2_security_group: "sandpit-1"
+ec2_security_group2: "sandpit-2"
 student_total: 1
-ec2_vpc_id: vpc-0b00c8cde80b8967d
-ec2_vpc_id2: vpc-0ef72dd9bc56f015d
-
-
+ec2_vpc_id: vpc-0020c8361e420fcd3
+ec2_vpc_id2: vpc-0020c8361e420fcd3
 
 networking: false
 ssh_port: 22
